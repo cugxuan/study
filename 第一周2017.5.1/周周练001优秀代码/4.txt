@@ -1,0 +1,43 @@
+/***
+by:lichenran
+
+坑点：精度？奇怪的特判？
+
+思路：最不容易写错的方法是求出两个点到原点的距离做减法再取绝对值，
+	好的方法可以减少逻辑分析以及代码量
+/***
+#include<iostream>
+#include<iomanip>
+#include<cmath>
+using namespace std;
+double a(int a,int b);
+int main()
+{
+	int N,x1,y1,x2,y2;
+	double sum1,sum2,sum;
+	cin>>N;
+	while(N--)
+	{
+		cin>>x1>>y1;
+		cin>>x2>>y2;
+		sum1=a(x1,y1);
+		sum2=a(x2,y2);
+		sum=fabs(sum1-sum2);
+		cout<<setiosflags(ios::fixed)<<setprecision(3)<<sum<<endl;
+
+	}
+	return 0;
+}
+double a(int a,int b)
+{
+	int i,n;
+	double sum=0,l; 
+	l=sqrt(2);
+	n=a+b;
+	for(i=0;i<n;i++)
+		sum+=i*l;
+	sum+=a*l;
+	for(i=1;i<=n;i++)
+		sum+=sqrt((i-1)*(i-1)+i*i);
+	return sum;
+}

@@ -1,0 +1,37 @@
+/****
+by:2016zzf
+
+坑点：?
+
+思路：模拟手算过程，优秀的思路可以减少代码量
+
+****/
+
+#include<iostream>
+#include<cstdio>
+#include<cstring>
+using namespace std;
+int main()
+{
+      int n,r,i;
+     char a[100];
+     char b[17]="0123456789ABCDEF";
+     while(cin>>n>>r)
+    {
+          i=0;
+          if(n<0)
+         {
+              cout<<"-";
+             n*=-1;
+          }
+     while(n)
+    {
+         a[i++]=b[n%r];
+         n/=r;
+    }
+    while(i--)
+   cout<<a[i];
+   cout<<endl;
+}
+return 0;
+}

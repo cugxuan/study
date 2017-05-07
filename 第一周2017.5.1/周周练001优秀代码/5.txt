@@ -1,0 +1,43 @@
+/***
+by:VVen
+
+思路：直接根据定义三重循环
+
+***/
+
+#include<iostream>
+using namespace std;
+
+
+int main() {
+	int s1[100][100];
+	int s2[100][100];
+	int s3[100][100];
+	int n;
+	int i, j,p,q;
+	while (cin >> n) {
+		for (i = 0; i < n; i++) {
+			for (j = 0; j < n; j++)cin >> s1[i][j];
+}
+		for (p = 0; p < n; p++) {
+			for (q = 0; q < n; q++)cin >> s2[p][q];
+		}
+		int a, b, c;
+		for (a = 0; a < n; a++) {
+			for (b = 0; b < n; b++) {
+				s3[a][b] = 0;
+				for (c = 0; c < n; c++)s3[a][b] += s1[a][c] * s2[c][b];
+			}
+		}
+		for (a = 0; a < n; a++) {
+			for (b = 0; b < n; b++) {
+				if(b!=n-1)cout << s3[a][b] << " ";
+				else cout << s3[a][b];
+			}
+			cout << endl;
+		}
+	}
+			
+	return 0;
+
+}
