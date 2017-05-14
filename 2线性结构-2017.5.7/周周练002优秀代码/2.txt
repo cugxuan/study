@@ -1,0 +1,33 @@
+/****
+by: VVen
+
+坑点：闰年
+
+思路：从第一天往后数数
+
+****/
+#include<iostream>
+#include<vector>
+using namespace std;
+bool isleapYear(int year) {
+	if (year % 400 == 0 || year % 4 == 0 && year % 100 != 0)
+		return 1;
+	else return 0;
+
+}
+int getDaysofYear(int m_year,int m_month,int m_day) {
+	int day_of_year(0);
+	int days[] = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	if (isleapYear(m_year))days[1] = 29;
+	for (int i = 0; i < m_month - 1; i++) { day_of_year += days[i]; }
+	return day_of_year + m_day;
+}
+
+int main() {
+	int a, b, c;
+	char d;
+	while (cin >> a>>d >> b>>d >> c) {
+		cout << getDaysofYear(a, b, c) << endl;
+	}
+	return 0;
+}

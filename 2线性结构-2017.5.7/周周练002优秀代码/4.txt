@@ -1,0 +1,58 @@
+/***
+by: VVen 
+
+坑点：？
+
+思路：模拟题，可以利用stl减少代码量，ps。补充一个讨论时候没有讲但是好用的stl deque
+/***
+#include<iostream>
+#include<string>
+#include<deque>
+using namespace std;
+
+int main() {
+	int n,count;
+	deque<string> str,v1,v2,ve;
+	string a,s1, s2;
+	while (cin >> count) {
+		for (int k = 0; k < count; k++) {
+			cin >> n >> s1;
+				if (s1 == "FIFO") {
+					int j(0);
+					for (int i = 0; i < n; i++) {
+						cin >> s2;
+						if (s2[0] == 'I') { cin >> a; ve.push_back(a); }
+						if (s2[0] == 'O') {
+							if (j < ve.size())v1.push_back(ve[j]);
+							else v1.push_back("None");
+							j++;
+						}
+					}
+					for (int q = 0; q < v1.size(); q++) {
+						cout << v1[q] << endl;
+					}
+				}
+				else if (s1 == "FILO") {
+					for (int i = 0; i < n; i++) {
+						cin >> s2;
+						if (s2[0] == 'I') { cin >> a; ve.push_back(a); }
+						if (s2[0] == 'O') {
+							if (ve.size() != 0) { v2.push_back(ve[ve.size() - 1]); ve.pop_back(); }
+							else
+							{
+								v2.push_back("None");
+							}
+						}
+					}
+					for (int p = 0; p< v2.size(); p++) {
+						cout << v2[p] << endl;
+					}
+				}
+				str.clear(); ve.clear(); v1.clear(); v2.clear();
+			}
+
+			
+		}
+	
+	return 0;
+}

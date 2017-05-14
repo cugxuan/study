@@ -1,0 +1,53 @@
+/***
+
+by  wwb123
+
+思路：模拟，简易高精度加法
+
+
+**/
+
+
+#include<string>
+#include<iostream>
+using namespace std;
+
+int output(string input)
+{
+	int a = 0;
+	for (int i = 0; i < input.length(); i++)
+	{
+		if (input[i] <= '9' && input[i] >= '0')
+		{
+			a = a * 10 + input[i] - '0';
+		}
+	}
+	return a;
+}
+int main()
+{
+	string input1,input2;
+	int a, b;
+	while (cin>>input1>>input2)
+	{
+		a = output(input1);
+		b = output(input2);
+		if (input1[0] == '-' && input2[0] == '-')
+		{
+			cout <<0- a - b << endl;
+		}
+		else if (input1[0] == '-'&& input2[0] != '-')
+		{
+			cout << -a + b << endl;
+		}
+		else if (input2[0] == '-'&& input1[0] != '-')
+		{
+			cout << a - b << endl;
+		}
+		else {
+			cout << a + b << endl;
+		}
+
+	}
+    return 0;
+}

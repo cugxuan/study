@@ -1,0 +1,44 @@
+/****
+by:dahongdou
+
+坑点：？
+
+思路：打表
+****/
+
+#include <iostream>
+using namespace std;
+
+int main()
+{
+	int n;
+	int i, j;
+	while (cin >> n){
+		if (n<1 || n>30)
+		{
+			continue;
+		}
+		int *a = new int[n + 1];
+		a[0] = 0;
+		a[1] = 1;
+		for (i = 1; i < n + 1; i++){
+			a[i] = a[1];
+			int *b = new int[n + 1];
+			b[0] = a[0];
+			for (j = 1; j < i; j++){
+				b[j] = a[j];
+				a[j] = a[j] + b[j - 1];
+			}
+			for (j = 1; j <= i; j++){
+				cout << a[j];
+				if (j != i)
+				{
+					cout << " ";
+				}
+			}
+			cout << endl;
+		}
+		cout << endl;
+	}
+	return 0;
+}

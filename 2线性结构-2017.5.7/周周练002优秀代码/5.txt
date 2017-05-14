@@ -1,0 +1,89 @@
+/***
+by: WangYannn/xlzhang223
+
+坑点：注意不止只有一个z和j的情况
+
+思路：推出公式a*b=c 或者根据定义递归模拟
+
+下面提供两种代码
+
+***/
+
+#include <iostream>
+#include <string>
+using namespace std;
+int a, b;
+int main() {
+	string str;
+	while (cin >> str) {
+		bool flag = 0;
+		int p = 0;
+		for (int i = 0; i < str.size(); i++) 
+			if (str[i] == 'z' || str[i] == 'j')
+				p++;
+		if (p != 2) goto k;
+		if (str == "zoj") { cout << "Accepted" << endl; flag = 1; }
+		for (int i = 0; i < str.size(); i++)
+		{
+			if (str[i] == 'z')
+				a = i;
+			if (str[i] == 'j')
+				b = i;
+		}
+		if (flag != 1 && b < a) { cout << "Wrong Answer" << endl; flag = 1; }
+		if (flag != 1 &&a!=0&& a == str.size() - b - 1&&b==a+2) { cout << "Accepted" << endl; flag = 1; }
+		if (flag != 1 &&a*(b-a-1)==str.size()-b-1&&b!=a+1) { cout << "Accepted" << endl; flag = 1; }
+		k:if(flag==0) cout << "Wrong Answer" << endl;
+	}
+	return 0;
+}
+
+
+/***********
+
+递归代码
+
+******/
+
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int ok(int l,int m,int r){
+    if(m<=0||l<0||r<0) return 0;
+    if(l==0&&m==1&&r==0) return 1;
+    if(l==r&&m==1) return 1;
+    return ok(l,m-1,r-l);
+}
+
+int B(string s,int &a,int &b,int &c){
+    int z=-1,j=-1;
+    for(int i=0;i<s.size();i++){
+        if(s[i]=='z'&&z==-1) z=i;
+        else if(s[i]=='z'&&z!=-1) return -1;
+        else if(s[i]=='j'&&j==-1) j=i;
+        else if(s[i]=='j'&&j!=-1) return -1;
+    }
+    if(j<z) return -1;
+    a=z;
+    c=s.size()-j-1;
+    b=s.size()-2-a-c;
+    return 0;
+}
+
+string s;
+
+
+int main(){
+    while(cin>>s){
+        int a,b,c,f;
+        f=B(s,a,b,c);
+        if(f==-1){
+           puts("Wrong Answer");continue;
+        }
+        f=ok(a,b,c);
+        if(f==1) puts("Accepted");
+        else puts("Wrong Answer");
+    }
+    return 0;
+}
