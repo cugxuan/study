@@ -1,0 +1,47 @@
+/****
+by: lichenran
+
+坑点：?
+
+思路：简单排序
+
+****/
+#include<iostream>
+#include<cmath>
+#include<algorithm>
+using namespace std;
+class p{
+public:
+	int a;
+	int b;
+	};
+bool cmp(p m,p n)
+{
+	return m.b>n.b;
+}
+int main()
+{
+	int n,i;
+	int a[101];
+	p pp[101];
+	while(cin>>n)
+	{
+		if(n==0) break;
+		else
+		{for(i=0;i<n;i++)
+			pp[i].a=0;
+		for(i=0;i<n;i++)
+			cin>>pp[i].a;
+		for(i=0;i<n;i++)
+			pp[i].b=fabs(pp[i].a);
+
+		sort(pp,pp+n,cmp);
+
+		for(i=0;i<n-1;i++)
+			cout<<pp[i].a<<" ";
+		cout<<pp[n-1].a<<endl;}
+
+
+	}
+	return 0;
+}

@@ -1,0 +1,90 @@
+/***
+by: wwb123
+
+坑点：？
+
+思路：归并排序应用，参考PPT
+/***
+#include<iostream>
+using namespace std;
+void paixu(int *l, int l_size, int *r, int r_size, int *tmp,int &count)
+{
+	int i = 0, j = 0, k = 0;
+	while (i < l_size && j < r_size)
+	{
+		if (l[i] <= r[j])
+		{
+			tmp[k] = l[i];
+			i++;
+			k++;
+		}
+		else
+		{
+			tmp[k] = r[j];
+			count += l_size - i;
+			k++;
+			j++;
+		}
+	}
+	while (i < l_size)
+	{
+		tmp[k] = l[i];
+		k++;
+		i++;
+	}
+	while (j < r_size)
+	{
+		tmp[k] = r[j];
+		k++;
+		j++;
+	}
+}
+void guibin(int *a, int n,int &count)
+{
+	static int temp[1005];
+	if (n <= 1)
+		return;
+	int l_size = n / 2 + n % 2;
+	int r_size = n / 2;
+	int *l = a;
+	int *r = a + l_size;
+	guibin(l, l_size,count);
+	guibin(r, r_size,count);
+	paixu(l, l_size, r, r_size,temp,count);
+	for (int i = 0; i < n; i++)
+		a[i] = temp[i];
+}
+int main()
+{
+	int **a;
+	int n = 0;
+	int *count;
+	int tmp = 0;
+	cin >> n;
+	//while (cin >> n)
+	//{
+		a = new int *[n+1];
+		count = new int[n+1];
+		for (int l = 0; l < n+1; l++)
+		{
+			count[l] = 0;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			cin >> tmp;
+			a[i] = new int[1005];
+			for (int j = 0; j < tmp; j++)
+			{
+				cin >> a[i][j];
+			}
+			guibin(a[i], tmp, count[i]);
+		}
+		int ii = 0;
+		for (; ii < n; ii++)
+		{
+			cout << "Scenario #" << ii + 1 << ":" << endl;
+			cout << count[ii] << endl<<endl;
+		}
+	//}
+    return 0;
+}

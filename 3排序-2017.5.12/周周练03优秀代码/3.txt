@@ -1,0 +1,61 @@
+/***
+
+by  lichenran
+
+坑点：错误的贪心思想
+
+思路：桶排序思想
+
+
+**/
+
+
+#include<iostream>
+#include<algorithm>
+#include<memory.h>
+using namespace std;
+bool cmp(int a,int b)
+{
+	return a>b;
+}
+int main()
+{
+	int M,N,i,j,m,p,count=0;
+	int a[3001],b[10000],c[1000];
+	while(cin>>N>>M)
+	{
+	
+		memset(b,0,sizeof(b));
+		count=0;
+		for(i=0;i<N;i++)
+		{
+			cin>>a[i];
+		}
+	
+			for(i=0;i<N;i++)
+				for(j=i+1;j<N;j++)
+				{	
+				m=a[i]+a[j];
+				b[m]++;
+				}
+	p=1;
+	for(i=9999;i>-1;i--)
+	{	
+		
+		while(b[i]--)
+		{
+			
+			c[count]=i;
+			count++;
+			
+		}
+		if(count>=M)
+			break;
+		
+	}
+	for(i=0;i<M-1;i++)
+	cout<<c[i]<<" ";
+	cout<<c[M-1]<<endl;
+	}
+	return 0;
+}
